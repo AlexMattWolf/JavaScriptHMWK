@@ -67,6 +67,7 @@ function lister(event) {
         document.getElementById(ID).remove();
         list.append("a").append("li").attr("class","item").attr("id",`${ID}`).attr("value",`${desc}`).html(entry);
         // console.log("no duplicates")
+        console.log("> ",change, bouncer);
       }
       else {
         list.append("a").append("li").attr("class","item").attr("id",`${ID}`).attr("value",`${desc}`).html(entry);
@@ -77,6 +78,7 @@ function lister(event) {
     }
     else if (change == "" && bouncer.includes(ID) === true) {
       document.getElementById(ID).remove();
+      barhop(ID);
       activereset();
     };
     
@@ -104,25 +106,29 @@ function lister(event) {
 };
 
 // When list item is selected, reset input box to null, and remove html for that item
-function eightysixed(lastcall, kickout) {
-  document.getElementById(lastcall).remove();
-  document.getElementById(kickout).value = "";
+function eightysixed(soda, scotch) {
+  document.getElementById(soda).remove();
+  document.getElementById(scotch).value = "";
 
-  //remove item from bouncer array to prevent error for re entering filter
-  var barhop = [];
-  for (var j = 0; j < bouncer.length; j++) {
-    if (bouncer[j] !== lastcall) {
-      barhop.push(bouncer[j])
-    }
-  }
-  bouncer = barhop;
-  console.log(bouncer)
+  barhop(soda);
   activereset();
 }
 
+function barhop (soda) {
+    //remove item from bouncer array to prevent error for re entering filter
+    var doorman = [];
+    for (var j = 0; j < bouncer.length; j++) {
+      if (bouncer[j] !== soda) {
+        doorman.push(bouncer[j])
+      }
+    }
+    bouncer = doorman;
+    console.log(bouncer)
+};
+
 // when bouncer array = 0, when all items have been clicked to be removed, remove "Active Filters" text too.
 function activereset() {
-  if (bouncer.length <= 1) {
+  if (bouncer.length < 1) {
     list.html("");
     k = 0;
     bouncer = []
