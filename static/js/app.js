@@ -77,7 +77,10 @@ function lister(event) {
     }
     else if (change == "" && bouncer.includes(ID) === true) {
       document.getElementById(ID).remove();
+      activereset();
     };
+    
+
 
     // detect when list item is clicked, get its id and text value;
     d3.selectAll(".item").on("click", function() {
@@ -119,9 +122,10 @@ function eightysixed(lastcall, kickout) {
 
 // when bouncer array = 0, when all items have been clicked to be removed, remove "Active Filters" text too.
 function activereset() {
-  if (bouncer.length == 0) {
+  if (bouncer.length <= 1) {
     list.html("");
     k = 0;
+    bouncer = []
   }
 }
 
